@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController
 @RequestMapping("/conversationsDetails")
@@ -28,11 +31,27 @@ public class ConversationsController{
         return new ResponseEntity<List<Conversations>>(list,HttpStatus.OK);
     }
 
+//    @RequestMapping(value = "/getconversationsbyid/{conversation_id}", method =GET)
+//    @ResponseBody
+//    @GetMapping("/getconversationsbyid/{conversation_id}")
+//    @GetMapping("/getconversationsbyid/conversation_id/")
+//    public ResponseEntity<Conversations> getconversationsById(@PathVariable("conversion_id") Integer conversation_id){
+//        Conversations cnv=service.getconversationsById(conversation_id);
+//        return new ResponseEntity<Conversations>(cnv,HttpStatus.OK);
+//    }
+
     @GetMapping("/getconversationsbyid/{conversation_id}")
-    public ResponseEntity<Conversations> getconversationsById(@PathVariable("conversion_id") Integer conversation_id){
-        Conversations cnv=service.getconversationsById(conversation_id);
-        return new ResponseEntity<Conversations>(cnv,HttpStatus.OK);
+    public ResponseEntity<Conversations> getconversationsById(@PathVariable("conversation_id") Integer conversation_id){
+        Conversations con=service.getconversationsById(conversation_id);
+        return new ResponseEntity<Conversations>(con,HttpStatus.OK);
     }
+
+
+
+
+
+
+
 //
 //     @PutMapping("/updateconversations/{conversation_id}")
 //    public ResponseEntity<String> updateconversations(@PathVariable("conversation_id") int conversation_id,@RequestBody Conversations conversation){
@@ -45,15 +64,13 @@ public class ConversationsController{
 //
 //    }
 
-//      @DeleteMapping("deleteconversations/{conversion_id}")
-//    public ResponseEntity<String> deleteconversations(@PathVariable("conversation_id") int conversation_id){
-//       return service.deleteconversations(conversation_id);
-////        return new ResponseEntity<String>(HttpStatus.OK);
-//    }
 
-    @DeleteMapping("deleteconversations/{conversion_id}")
-    public ResponseEntity<String> deleteconversations(@PathVariable Integer conversation_id){
-        return service.deleteconversations(conversation_id);
+
+    @DeleteMapping("deleteconversations/{conversation_id}")
+
+    public ResponseEntity<String> deleteconversations(@PathVariable("conversation_id") Integer conversation_id){
+        service.deleteconversations(conversation_id);
+        return new ResponseEntity<String>("conversation with'"+conversation_id+"'has been deleted",HttpStatus.OK);
     }
 
 

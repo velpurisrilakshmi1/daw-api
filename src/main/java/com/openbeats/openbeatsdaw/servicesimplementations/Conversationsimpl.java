@@ -4,10 +4,10 @@ import com.openbeats.openbeatsdaw.Entity.Conversations;
 import com.openbeats.openbeatsdaw.Repository.ConversationsRepository;
 import com.openbeats.openbeatsdaw.Service.ConversationsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Conversationsimpl implements ConversationsService {
@@ -28,11 +28,18 @@ public class Conversationsimpl implements ConversationsService {
     public Conversations getconversationsById(Integer conversation_id){
         return repository.findById(conversation_id).get();
     }
+//    @Override
+//    public Optional<Conversations> getconversationsById(Integer conversation_id){
+//        return repository.findById(conversation_id);
+//    }
+
+
+
     @Override
-    public ResponseEntity<String> deleteconversations(Integer conversation_id){
+    public void deleteconversations(Integer conversation_id){
 
         repository.deleteById(conversation_id);
-        return null;
+
     }
 
 }
